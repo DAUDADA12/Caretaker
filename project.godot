@@ -22,3 +22,10 @@ project/assembly_name="Caretaker"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/py4godot/plugin.cfg")
+
+[layer_names]
+
+2d_render/layer_1="UI"
+2d_render/layer_2="Pet"
+2d_render/layer_3="Background"
+2d_render/layer_4="Particle"
