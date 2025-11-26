@@ -187,7 +187,9 @@ skew = 0.0
 script = ExtResource("1_svmx4")
 PetName = ""
 PetAge = 0
-PetType = ""
+PetType = "German Shepherd"
+PetHappines = 0
+PetCleanlines = 100
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
