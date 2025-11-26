@@ -1,8 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://b6dupnl60kayx"]
+[gd_scene load_steps=16 format=3 uid="uid://6rsc73yraej2"]
 
-[ext_resource type="Script" path="res://Scripts/PetData/InfoManager.py" id="1_svmx4"]
-[ext_resource type="Texture2D" uid="uid://33fwansteqy2" path="res://Sprites/1 Dog/Idle.png" id="2_xtyv1"]
-[ext_resource type="Texture2D" uid="uid://p20q2a27dbwb" path="res://Sprites/1 Dog/Walk.png" id="3_4yith"]
+[ext_resource type="Script" path="res://Scripts/PetData/InfoManager.py" id="1_1hlge"]
+[ext_resource type="Texture2D" uid="uid://bqyq4rlko3a3a" path="res://Sprites/2 Dog 2/Idle.png" id="3_101na"]
+[ext_resource type="Texture2D" uid="uid://darbumok5wql4" path="res://Sprites/2 Dog 2/Walk.png" id="4_t4afj"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4a7es"]
 animation = &"Animations/Idle"
@@ -20,10 +20,10 @@ switch_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5ym5g"]
 switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_wherd"]
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_6l81h"]
 states/End/position = Vector2(998, 100)
 states/Idle/node = SubResource("AnimationNodeAnimation_4a7es")
-states/Idle/position = Vector2(440, 100)
+states/Idle/position = Vector2(430, 100)
 states/Walk/node = SubResource("AnimationNodeAnimation_d2vac")
 states/Walk/position = Vector2(681, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ol4vd"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_ovm7o"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_5ym5g")]
@@ -52,7 +52,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_xtyv1")]
+"values": [ExtResource("3_101na")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -72,7 +72,7 @@ _data = {
 &"RESET": SubResource("Animation_dmepy")
 }
 
-[sub_resource type="Animation" id="Animation_b2tmv"]
+[sub_resource type="Animation" id="Animation_nyi4q"]
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -96,7 +96,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_xtyv1")]
+"values": [ExtResource("3_101na")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -111,7 +111,7 @@ tracks/2/keys = {
 "values": [4]
 }
 
-[sub_resource type="Animation" id="Animation_1vnhc"]
+[sub_resource type="Animation" id="Animation_j2yss"]
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -123,7 +123,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_4yith")]
+"values": [ExtResource("4_t4afj")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -150,16 +150,16 @@ tracks/2/keys = {
 "values": [0, 1, 2, 3, 4, 5]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jkg0w"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g13aw"]
 _data = {
-&"Idle": SubResource("Animation_b2tmv"),
-&"Walk": SubResource("Animation_1vnhc")
+&"Idle": SubResource("Animation_nyi4q"),
+&"Walk": SubResource("Animation_j2yss")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_svmx4"]
 radius = 18.973665
 
-[node name="Dog1" type="Node2D"]
+[node name="Dog2" type="Node2D"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -187,10 +187,10 @@ position = Vector2(0, 0)
 rotation = 0.0
 scale = Vector2(1, 1)
 skew = 0.0
-script = ExtResource("1_svmx4")
+script = ExtResource("1_1hlge")
 PetName = ""
 PetAge = 0
-PetType = "German Shepherd"
+PetType = "Iba Shinu"
 PetHappines = 0
 PetCleanlines = 100
 PetHunger = 0
@@ -202,20 +202,21 @@ motion_mode = 1
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 texture_filter = 1
 texture_repeat = 1
-texture = ExtResource("2_xtyv1")
+texture = ExtResource("3_101na")
 hframes = 6
 
 [node name="AnimationTree" type="AnimationTree" parent="CharacterBody2D"]
 root_node = NodePath("../..")
-tree_root = SubResource("AnimationNodeStateMachine_wherd")
+tree_root = SubResource("AnimationNodeStateMachine_6l81h")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
 root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_ufawq"),
-&"Animations": SubResource("AnimationLibrary_jkg0w")
+&"Animations": SubResource("AnimationLibrary_g13aw")
 }
+speed_scale = 1.593
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(-6, 9)
