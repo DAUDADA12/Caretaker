@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://6rsc73yraej2"]
+[gd_scene load_steps=17 format=3 uid="uid://6rsc73yraej2"]
 
-[ext_resource type="Script" path="res://Scripts/PetData/InfoManager.py" id="1_1hlge"]
+[ext_resource type="Script" path="res://Scripts/PetData/Pet_Data.py" id="1_1hlge"]
 [ext_resource type="Texture2D" uid="uid://bqyq4rlko3a3a" path="res://Sprites/2 Dog 2/Idle.png" id="3_101na"]
 [ext_resource type="Texture2D" uid="uid://darbumok5wql4" path="res://Sprites/2 Dog 2/Walk.png" id="4_t4afj"]
+[ext_resource type="PackedScene" uid="uid://77wxs0vi71pn" path="res://Scenes/UI/GameUI.tscn" id="5_cm8ee"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4a7es"]
 animation = &"Animations/Idle"
@@ -188,15 +189,22 @@ rotation = 0.0
 scale = Vector2(1, 1)
 skew = 0.0
 script = ExtResource("1_1hlge")
-PetName = ""
-PetAge = 0
-PetType = "Iba Shinu"
-PetHappines = 0
-PetCleanlines = 100
-PetHunger = 0
-PetEnergy = 0
+Name = ""
+Age = 0
+Hunger = 0
+Age_Node = NodePath("Control/Label")
+rate_of_change_of_age = 0.14
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="Control" parent="." instance=ExtResource("5_cm8ee")]
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(581, 306)
+scale = Vector2(7.1, 7.1)
 motion_mode = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
@@ -221,3 +229,5 @@ speed_scale = 1.593
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(-6, 9)
 shape = SubResource("CircleShape2D_svmx4")
+
+[editable path="Control"]

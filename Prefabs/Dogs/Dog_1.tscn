@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://b6dupnl60kayx"]
 
-[ext_resource type="Script" path="res://Scripts/PetData/InfoManager.py" id="1_svmx4"]
+[ext_resource type="Script" path="res://Scripts/PetData/Pet_Data.py" id="1_svmx4"]
 [ext_resource type="Texture2D" uid="uid://33fwansteqy2" path="res://Sprites/1 Dog/Idle.png" id="2_xtyv1"]
 [ext_resource type="Texture2D" uid="uid://p20q2a27dbwb" path="res://Sprites/1 Dog/Walk.png" id="3_4yith"]
 
@@ -188,13 +188,10 @@ rotation = 0.0
 scale = Vector2(1, 1)
 skew = 0.0
 script = ExtResource("1_svmx4")
-PetName = ""
-PetAge = 0
-PetType = "German Shepherd"
-PetHappines = 0
-PetCleanlines = 100
-PetHunger = 0
-PetEnergy = 0
+Name = ""
+Age = 0
+Hunger = 0
+rate_of_change_of_age = 0.3
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 motion_mode = 1
