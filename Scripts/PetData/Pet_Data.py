@@ -31,3 +31,11 @@ class Pet_Data(Node):
 		self.Age += self.rate_of_change_of_age * delta
 		self.Happines -= self.rate_of_change_of_happiness * delta
 		self.Hunger -= self.rate_of_change_of_hunger * delta
+
+	def _exit_tree(self):
+		self.Data["petAge"] = self.Age
+		self.Data["petHunger"] = self.Hunger
+		self.Data["petEnergy"] = self.Happines
+		if(self.info_manager_script):
+			self.info_manager_script.save_data(self.Data)
+		
