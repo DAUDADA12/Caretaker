@@ -1,9 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://cw3o86p3govo5"]
+[gd_scene load_steps=13 format=3 uid="uid://ee0gl2ktuu63"]
 
 [ext_resource type="Script" path="res://Scripts/Initializer/Data_Puller.py" id="1_hpc76"]
 [ext_resource type="Texture2D" uid="uid://bpatsm2140fuu" path="res://Sprites/Background/LivingRoom.png" id="2_q68mp"]
 [ext_resource type="PackedScene" uid="uid://77wxs0vi71pn" path="res://Scenes/UI/GameUI.tscn" id="2_tr2i4"]
-[ext_resource type="PackedScene" uid="uid://6rsc73yraej2" path="res://Prefabs/Dogs/Dog_2.tscn" id="3_7rqgy"]
+[ext_resource type="PackedScene" path="res://Prefabs/Dogs/Dog_2.tscn" id="3_7rqgy"]
 [ext_resource type="Script" path="res://Scripts/PetData/Pet_DATA_UI.py" id="3_nhkr4"]
 [ext_resource type="PackedScene" uid="uid://b6dupnl60kayx" path="res://Prefabs/Dogs/Dog_1.tscn" id="4_qxria"]
 [ext_resource type="Script" path="res://Scripts/PetData/Pet_Data.py" id="6_y4jh7"]
@@ -99,7 +99,7 @@ Hunger = 0
 Happines = 0
 Info_Manager = NodePath("../../..")
 rate_of_change_of_age = 0.02
-rate_of_change_of_hunger = 0.4
+rate_of_change_of_hunger = 0.15
 rate_of_change_of_happiness = 0.5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]

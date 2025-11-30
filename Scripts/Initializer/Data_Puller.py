@@ -45,4 +45,4 @@ class Data_Puller(Node2D):
 
 	def get_save_path(self) -> str:
 		base = os.getcwd()
-		return os.path.join(base, self.SAVE_PATH)
+		return os.path.join(base, self.SAVE_PA
