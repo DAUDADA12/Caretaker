@@ -1,11 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://cw3o86p3govo5"]
+[gd_scene load_steps=10 format=3 uid="uid://cw3o86p3govo5"]
 
 [ext_resource type="Script" path="res://Scripts/Initializer/Data_Puller.py" id="1_hpc76"]
+[ext_resource type="Texture2D" uid="uid://bpatsm2140fuu" path="res://Sprites/Background/LivingRoom.png" id="2_q68mp"]
 [ext_resource type="PackedScene" uid="uid://77wxs0vi71pn" path="res://Scenes/UI/GameUI.tscn" id="2_tr2i4"]
 [ext_resource type="PackedScene" uid="uid://6rsc73yraej2" path="res://Prefabs/Dogs/Dog_2.tscn" id="3_7rqgy"]
 [ext_resource type="Script" path="res://Scripts/PetData/Pet_DATA_UI.py" id="3_nhkr4"]
 [ext_resource type="PackedScene" uid="uid://b6dupnl60kayx" path="res://Prefabs/Dogs/Dog_1.tscn" id="4_qxria"]
 [ext_resource type="Script" path="res://Scripts/PetData/Pet_Data.py" id="6_y4jh7"]
+
+[sub_resource type="Gradient" id="Gradient_q68mp"]
+offsets = PackedFloat32Array(0.9866667, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_f140w"]
+gradient = SubResource("Gradient_q68mp")
+fill_to = Vector2(0, 1)
 
 [node name="MainScene" type="Node2D"]
 _import_path = NodePath("")
@@ -37,6 +45,20 @@ scale = Vector2(1, 1)
 skew = 0.0
 script = ExtResource("1_hpc76")
 SAVE_PATH = "save_data.json"
+
+[node name="BlackBG" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(578.25, 324)
+scale = Vector2(35.859375, 20.25)
+texture = SubResource("GradientTexture2D_f140w")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(578.25, 324)
+scale = Vector2(35.859375, 20.25)
+texture = ExtResource("2_q68mp")
 
 [node name="Dog1" parent="." instance=ExtResource("4_qxria")]
 
