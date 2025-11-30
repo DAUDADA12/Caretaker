@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cw3o86p3govo5"]
+[gd_scene load_steps=21 format=3 uid="uid://cw3o86p3govo5"]
 
 [ext_resource type="Script" path="res://Scripts/Initializer/Data_Puller.py" id="1_hpc76"]
 [ext_resource type="Texture2D" uid="uid://bpatsm2140fuu" path="res://Sprites/Background/LivingRoom.png" id="2_q68mp"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://mr8s3gbg7ew3" path="res://UI/Images/Apple Icon.png" id="8_f140w"]
 [ext_resource type="Texture2D" uid="uid://ce23xipo0slyn" path="res://UI/Images/CareTaker UI Icons0.png" id="9_4b75m"]
 [ext_resource type="Texture2D" uid="uid://msgnvpjjxt1p" path="res://UI/Images/LightningIcon.png" id="10_8ju71"]
+[ext_resource type="Texture2D" uid="uid://btj8sq6bqk5l4" path="res://UI/Images/Smile.png" id="12_xb4mg"]
 
 [sub_resource type="Gradient" id="Gradient_q68mp"]
 offsets = PackedFloat32Array(0.9866667, 1)
@@ -112,8 +113,8 @@ size_flags_horizontal = 0
 script = ExtResource("3_nhkr4")
 Age_Label_Node = NodePath("Head/HBoxContainer/Pet_Age")
 Name_Label_Node = NodePath("Head/HBoxContainer/Pet_Name")
-Hunger_Bar_Node = NodePath("Bottom/HBoxContainer/Control/HBoxContainer/HealthBar")
-Happiness_Bar_Node = NodePath("Bottom/HBoxContainer/Control2/HBoxContainer/EnergyBar")
+Hunger_Bar_Node = NodePath("Bottom/HBoxContainer/Hunger/HBoxContainer/HealthBar")
+Happiness_Bar_Node = NodePath("Bottom/HBoxContainer/Happiness/HBoxContainer/HealthBar")
 Type_Lable_Node = NodePath("Head/HBoxContainer/Pet_Type")
 PetInfo_Node = NodePath("PetInfo")
 
@@ -124,14 +125,11 @@ horizontal_alignment = 1
 offset_left = 24.0
 offset_right = -16.0
 
-[node name="TextureRect" parent="CanvasLayer/Control/Bottom/HBoxContainer/Control/HBoxContainer" index="0"]
-texture = ExtResource("8_f140w")
-
-[node name="Energy" type="Control" parent="CanvasLayer/Control/Bottom/HBoxContainer" index="1"]
+[node name="Health" type="Control" parent="CanvasLayer/Control/Bottom/HBoxContainer" index="0"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/Bottom/HBoxContainer/Energy"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/Bottom/HBoxContainer/Health"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -139,15 +137,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/Bottom/HBoxContainer/Energy/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/Bottom/HBoxContainer/Health/HBoxContainer"]
 texture_filter = 1
 texture_repeat = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("10_8ju71")
+texture = ExtResource("8_4b75m")
 
-[node name="EnergyBar" type="HSlider" parent="CanvasLayer/Control/Bottom/HBoxContainer/Energy/HBoxContainer"]
+[node name="EnergyBar" type="HSlider" parent="CanvasLayer/Control/Bottom/HBoxContainer/Health/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -156,22 +154,22 @@ editable = false
 scrollable = false
 tick_count = 1
 
-[node name="TextureRect" parent="CanvasLayer/Control/Bottom/HBoxContainer/Control2/HBoxContainer" index="0"]
-texture = ExtResource("8_4b75m")
-
-[node name="EnergyBar" parent="CanvasLayer/Control/Bottom/HBoxContainer/Control2/HBoxContainer" index="1"]
-theme = SubResource("Theme_4b75m")
-
 [node name="PetInfo" parent="CanvasLayer/Control" index="2"]
 script = ExtResource("6_y4jh7")
 Name = ""
 Age = 0
 Hunger = 0
 Happines = 0
+Energy = 0
+Health = 0
+Cleanliness = 0
 Info_Manager = NodePath("../../..")
 rate_of_change_of_age = 0.02
 rate_of_change_of_hunger = 0.4
 rate_of_change_of_happiness = 0.5
+rate_of_change_of_health = 1.2
+rate_of_change_of_cleanliness = 0.2
+rate_of_change_of_energy = 0.5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
 layout_mode = 1
@@ -209,6 +207,36 @@ texture_filter = 1
 layout_mode = 2
 size_flags_vertical = 3
 icon = ExtResource("8_4b75m")
+icon_alignment = 1
+expand_icon = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.052
+anchor_top = 0.284
+anchor_right = 0.13900001
+anchor_bottom = 0.642
+offset_left = 0.09600067
+offset_top = -0.03201294
+offset_right = 3.8719788
+offset_bottom = -0.016021729
+grow_vertical = 2
+alignment = 1
+
+[node name="Energy" type="Button" parent="CanvasLayer/Control/VBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+icon = ExtResource("10_8ju71")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Rest" type="Button" parent="CanvasLayer/Control/VBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+icon = ExtResource("12_xb4mg")
 icon_alignment = 1
 expand_icon = true
 

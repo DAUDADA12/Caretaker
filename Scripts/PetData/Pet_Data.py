@@ -8,7 +8,7 @@ class Pet_Data(Node):
 	Age: int = 0
 	Hunger: float = 0
 	Happines: float = 0
-	Energy: int = 0
+	Energy: float = 0
 	Health: int = 0
 	Cleanliness: int = 0
 	Info_Manager: NodePath = NodePath()

@@ -13,7 +13,9 @@ class Data_Puller(Node2D):
 		'petAge' : 0,
 		'petHunger' : 100,
 		'petEnergy' : 100,
-		'petType' : 0
+		'petType' : 0,
+		'petHappines' : 100,
+		'petCleanliness' : 100
 	}
 
 	def _ready(self):
@@ -45,4 +47,4 @@ class Data_Puller(Node2D):
 
 	def get_save_path(self) -> str:
 		base = os.getcwd()
-		return os.path.join(base, self.SAVE_PA
+		return os.path.join(base, self.SAVE_PATH)

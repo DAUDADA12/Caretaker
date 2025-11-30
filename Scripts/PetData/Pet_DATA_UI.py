@@ -45,6 +45,8 @@ class Pet_DATA_UI(Control):
 			self.Type_Label.text = "Text: Cat"
 
 	def _process(self, delta):
+		hunger_int = int(self.pet_info_py.Hunger)
+		happiness_int = int(self.pet_info_py.Happines)
 		self.Age_Label.text = "Age: " + str(round(float(self.pet_info_py.Age), 1))
-		self.Hunger_Bar.value = self.pet_info_py.Hunger
-		self.Happiness_Bar.value = self.pet_info_py.Happines
+		self.Hunger_Bar.value = hunger_int
+		self.Happiness_Bar.value = happiness_int

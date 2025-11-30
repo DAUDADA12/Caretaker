@@ -2,7 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://cru5hfyhvfvn1" path="res://UI/Fonts/Pixelated/PixelifySans-VariableFont_wght.ttf" id="1_13cgw"]
 [ext_resource type="Script" path="res://Scripts/PetData/Pet_Data.py" id="1_npa51"]
-[ext_resource type="Texture2D" uid="uid://dlf3c4giaf8j3" path="res://UI/Images/CareTaker UI Icons1.png" id="2_xkiwj"]
+[ext_resource type="Texture2D" uid="uid://mr8s3gbg7ew3" path="res://UI/Images/Apple Icon.png" id="3_4284l"]
 [ext_resource type="Theme" uid="uid://dtkaoanqkkah8" path="res://UI/Themes/StatusBarTheme.tres" id="3_fe2yh"]
 [ext_resource type="Texture2D" uid="uid://msgnvpjjxt1p" path="res://UI/Images/LightningIcon.png" id="4_tog36"]
 [ext_resource type="Texture2D" uid="uid://ig2ehc0braoe" path="res://UI/Images/Cleanliness.png" id="5_4284l"]
@@ -154,11 +154,11 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Control" type="Control" parent="Bottom/HBoxContainer"]
+[node name="Hunger" type="Control" parent="Bottom/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Bottom/HBoxContainer/Control"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Bottom/HBoxContainer/Hunger"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -166,15 +166,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="Bottom/HBoxContainer/Control/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Bottom/HBoxContainer/Hunger/HBoxContainer"]
 texture_filter = 1
 texture_repeat = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("2_xkiwj")
+texture = ExtResource("3_4284l")
 
-[node name="HealthBar" type="HSlider" parent="Bottom/HBoxContainer/Control/HBoxContainer"]
+[node name="HealthBar" type="HSlider" parent="Bottom/HBoxContainer/Hunger/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -184,11 +184,11 @@ editable = false
 scrollable = false
 tick_count = 1
 
-[node name="Control4" type="Control" parent="Bottom/HBoxContainer"]
+[node name="Cleanliness" type="Control" parent="Bottom/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Bottom/HBoxContainer/Control4"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Bottom/HBoxContainer/Cleanliness"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -196,7 +196,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="Bottom/HBoxContainer/Control4/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Bottom/HBoxContainer/Cleanliness/HBoxContainer"]
 texture_filter = 1
 texture_repeat = 1
 layout_mode = 2
@@ -204,7 +204,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("5_4284l")
 
-[node name="HealthBar" type="HSlider" parent="Bottom/HBoxContainer/Control4/HBoxContainer"]
+[node name="HealthBar" type="HSlider" parent="Bottom/HBoxContainer/Cleanliness/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -214,11 +214,11 @@ editable = false
 scrollable = false
 tick_count = 1
 
-[node name="Control3" type="Control" parent="Bottom/HBoxContainer"]
+[node name="Happiness" type="Control" parent="Bottom/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Bottom/HBoxContainer/Control3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Bottom/HBoxContainer/Happiness"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -226,7 +226,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="Bottom/HBoxContainer/Control3/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Bottom/HBoxContainer/Happiness/HBoxContainer"]
 texture_filter = 1
 texture_repeat = 1
 layout_mode = 2
@@ -234,7 +234,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("6_sinwf")
 
-[node name="HealthBar" type="HSlider" parent="Bottom/HBoxContainer/Control3/HBoxContainer"]
+[node name="HealthBar" type="HSlider" parent="Bottom/HBoxContainer/Happiness/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -244,11 +244,11 @@ editable = false
 scrollable = false
 tick_count = 1
 
-[node name="Control2" type="Control" parent="Bottom/HBoxContainer"]
+[node name="Energy" type="Control" parent="Bottom/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Bottom/HBoxContainer/Control2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Bottom/HBoxContainer/Energy"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -256,7 +256,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="Bottom/HBoxContainer/Control2/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Bottom/HBoxContainer/Energy/HBoxContainer"]
 texture_filter = 1
 texture_repeat = 1
 layout_mode = 2
@@ -264,7 +264,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("4_tog36")
 
-[node name="EnergyBar" type="HSlider" parent="Bottom/HBoxContainer/Control2/HBoxContainer"]
+[node name="EnergyBar" type="HSlider" parent="Bottom/HBoxContainer/Energy/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
