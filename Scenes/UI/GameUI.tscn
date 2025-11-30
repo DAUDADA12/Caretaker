@@ -1,11 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://77wxs0vi71pn"]
+[gd_scene load_steps=10 format=3 uid="uid://77wxs0vi71pn"]
 
 [ext_resource type="FontFile" uid="uid://cru5hfyhvfvn1" path="res://UI/Fonts/Pixelated/PixelifySans-VariableFont_wght.ttf" id="1_13cgw"]
 [ext_resource type="Script" path="res://Scripts/PetData/Pet_Data.py" id="1_npa51"]
 [ext_resource type="Texture2D" uid="uid://dlf3c4giaf8j3" path="res://UI/Images/CareTaker UI Icons1.png" id="2_xkiwj"]
 [ext_resource type="Theme" uid="uid://dtkaoanqkkah8" path="res://UI/Themes/StatusBarTheme.tres" id="3_fe2yh"]
 [ext_resource type="Texture2D" uid="uid://msgnvpjjxt1p" path="res://UI/Images/LightningIcon.png" id="4_tog36"]
+[ext_resource type="Texture2D" uid="uid://ig2ehc0braoe" path="res://UI/Images/Cleanliness.png" id="5_4284l"]
 [ext_resource type="Script" path="res://Scripts/Initializer/Data_Puller.py" id="6_intyv"]
+[ext_resource type="Texture2D" uid="uid://btj8sq6bqk5l4" path="res://UI/Images/Smile.png" id="6_sinwf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_71wt1"]
 font = ExtResource("1_13cgw")
@@ -84,10 +86,16 @@ Name = ""
 Age = 0
 Hunger = 0
 Happines = 0
+Energy = 0
+Health = 0
+Cleanliness = 0
 Info_Manager = NodePath("PetInfo")
 rate_of_change_of_age = 0.3
 rate_of_change_of_hunger = 0.4
 rate_of_change_of_happiness = 0.5
+rate_of_change_of_health = 1.2
+rate_of_change_of_cleanliness = 0.2
+rate_of_change_of_energy = 0.5
 
 [node name="Head" type="Panel" parent="."]
 layout_mode = 1
@@ -167,6 +175,66 @@ size_flags_vertical = 4
 texture = ExtResource("2_xkiwj")
 
 [node name="HealthBar" type="HSlider" parent="Bottom/HBoxContainer/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("3_fe2yh")
+value = 15.0
+editable = false
+scrollable = false
+tick_count = 1
+
+[node name="Control4" type="Control" parent="Bottom/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Bottom/HBoxContainer/Control4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Bottom/HBoxContainer/Control4/HBoxContainer"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_4284l")
+
+[node name="HealthBar" type="HSlider" parent="Bottom/HBoxContainer/Control4/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("3_fe2yh")
+value = 15.0
+editable = false
+scrollable = false
+tick_count = 1
+
+[node name="Control3" type="Control" parent="Bottom/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Bottom/HBoxContainer/Control3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Bottom/HBoxContainer/Control3/HBoxContainer"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("6_sinwf")
+
+[node name="HealthBar" type="HSlider" parent="Bottom/HBoxContainer/Control3/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
