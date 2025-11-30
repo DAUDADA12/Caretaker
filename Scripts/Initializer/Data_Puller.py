@@ -18,8 +18,6 @@ class Data_Puller(Node2D):
 
 	def _ready(self):
 		print("SaveManager ready!")
-		data = self.load_data()
-		print("Loaded:", data)
 
 	def save_data(self, data: dict):
 		try:

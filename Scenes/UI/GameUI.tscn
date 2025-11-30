@@ -1,18 +1,93 @@
-[gd_scene load_steps=3 format=3 uid="uid://77wxs0vi71pn"]
+[gd_scene load_steps=8 format=3 uid="uid://77wxs0vi71pn"]
 
 [ext_resource type="FontFile" uid="uid://cru5hfyhvfvn1" path="res://UI/Fonts/Pixelated/PixelifySans-VariableFont_wght.ttf" id="1_13cgw"]
+[ext_resource type="Script" path="res://Scripts/PetData/Pet_Data.py" id="1_npa51"]
+[ext_resource type="Texture2D" uid="uid://dlf3c4giaf8j3" path="res://UI/Images/CareTaker UI Icons1.png" id="2_xkiwj"]
+[ext_resource type="Theme" uid="uid://dtkaoanqkkah8" path="res://UI/Themes/StatusBarTheme.tres" id="3_fe2yh"]
+[ext_resource type="Texture2D" uid="uid://msgnvpjjxt1p" path="res://UI/Images/LightningIcon.png" id="4_tog36"]
+[ext_resource type="Script" path="res://Scripts/Initializer/Data_Puller.py" id="6_intyv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_71wt1"]
 font = ExtResource("1_13cgw")
 font_size = 60
 
 [node name="Control" type="Control"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
 layout_mode = 3
 anchors_preset = 15
+anchor_left = 0.0
+anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 0
+focus_behavior_recursive = 0
+mouse_filter = 0
+mouse_behavior_recursive = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+accessibility_name = ""
+accessibility_description = ""
+accessibility_live = 0
+accessibility_controls_nodes = Array[NodePath]([])
+accessibility_described_by_nodes = Array[NodePath]([])
+accessibility_labeled_by_nodes = Array[NodePath]([])
+accessibility_flow_to_nodes = Array[NodePath]([])
+theme_type_variation = &""
+script = ExtResource("1_npa51")
+Name = ""
+Age = 0
+Hunger = 0
+Happines = 0
+Info_Manager = NodePath("PetInfo")
+rate_of_change_of_age = 0.3
+rate_of_change_of_hunger = 0.4
+rate_of_change_of_happiness = 0.5
 
 [node name="Head" type="Panel" parent="."]
 layout_mode = 1
@@ -70,19 +145,74 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="HSlider" type="HSlider" parent="Bottom/HBoxContainer"]
+[node name="Control" type="Control" parent="Bottom/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Bottom/HBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Bottom/HBoxContainer/Control/HBoxContainer"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_xkiwj")
+
+[node name="HealthBar" type="HSlider" parent="Bottom/HBoxContainer/Control/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+theme = ExtResource("3_fe2yh")
+value = 15.0
 editable = false
 scrollable = false
 tick_count = 1
 
-[node name="HSlider2" type="HSlider" parent="Bottom/HBoxContainer"]
+[node name="Control2" type="Control" parent="Bottom/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Bottom/HBoxContainer/Control2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Bottom/HBoxContainer/Control2/HBoxContainer"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_tog36")
+
+[node name="EnergyBar" type="HSlider" parent="Bottom/HBoxContainer/Control2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+theme = ExtResource("3_fe2yh")
 editable = false
 scrollable = false
 tick_count = 1
-ticks_position = 3
+
+[node name="PetInfo" type="Node" parent="."]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+script = ExtResource("6_intyv")
+SAVE_PATH = "save_data.json"

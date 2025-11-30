@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://cw3o86p3govo5"]
+[gd_scene load_steps=7 format=3 uid="uid://cw3o86p3govo5"]
 
 [ext_resource type="Script" path="res://Scripts/Initializer/Data_Puller.py" id="1_hpc76"]
 [ext_resource type="PackedScene" uid="uid://77wxs0vi71pn" path="res://Scenes/UI/GameUI.tscn" id="2_tr2i4"]
+[ext_resource type="PackedScene" uid="uid://6rsc73yraej2" path="res://Prefabs/Dogs/Dog_2.tscn" id="3_7rqgy"]
 [ext_resource type="Script" path="res://Scripts/PetData/Pet_DATA_UI.py" id="3_nhkr4"]
+[ext_resource type="PackedScene" uid="uid://b6dupnl60kayx" path="res://Prefabs/Dogs/Dog_1.tscn" id="4_qxria"]
+[ext_resource type="Script" path="res://Scripts/PetData/Pet_Data.py" id="6_y4jh7"]
 
 [node name="MainScene" type="Node2D"]
 _import_path = NodePath("")
@@ -33,73 +36,46 @@ rotation = 0.0
 scale = Vector2(1, 1)
 skew = 0.0
 script = ExtResource("1_hpc76")
+SAVE_PATH = "save_data.json"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Dog1" parent="." instance=ExtResource("4_qxria")]
 
-[node name="Control" parent="CanvasLayer" instance=ExtResource("2_tr2i4")]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 2
-auto_translate_mode = 0
-editor_description = ""
-visible = true
-modulate = Color(1, 1, 1, 1)
-self_modulate = Color(1, 1, 1, 1)
-show_behind_parent = false
-top_level = false
-clip_children = 0
-light_mask = 1
-visibility_layer = 1
-z_index = 0
-z_as_relative = true
-y_sort_enabled = false
-texture_filter = 0
-texture_repeat = 0
-use_parent_material = false
-clip_contents = false
-custom_minimum_size = Vector2(0, 0)
-layout_direction = 0
-anchor_left = 0.0
-anchor_top = 0.0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
-rotation = 0.0
-scale = Vector2(1, 1)
-pivot_offset = Vector2(0, 0)
-size_flags_horizontal = 1
-size_flags_vertical = 1
-size_flags_stretch_ratio = 1.0
-localize_numeral_system = true
-tooltip_text = ""
-tooltip_auto_translate_mode = 0
-focus_neighbor_left = NodePath("")
-focus_neighbor_top = NodePath("")
-focus_neighbor_right = NodePath("")
-focus_neighbor_bottom = NodePath("")
-focus_next = NodePath("")
-focus_previous = NodePath("")
-focus_mode = 0
-focus_behavior_recursive = 0
-mouse_filter = 0
-mouse_behavior_recursive = 0
-mouse_force_pass_scroll_events = true
-mouse_default_cursor_shape = 0
-accessibility_name = ""
-accessibility_description = ""
-accessibility_live = 0
-accessibility_controls_nodes = Array[NodePath]([])
-accessibility_described_by_nodes = Array[NodePath]([])
-accessibility_labeled_by_nodes = Array[NodePath]([])
-accessibility_flow_to_nodes = Array[NodePath]([])
-theme_type_variation = &""
+[node name="CharacterBody2D" parent="Dog1" index="0"]
+position = Vector2(581, 306)
+scale = Vector2(7.1, 7.1)
+
+[node name="Dog2" parent="." instance=ExtResource("3_7rqgy")]
+visible = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(578, 325)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="Control" parent="Camera2D/CanvasLayer" instance=ExtResource("2_tr2i4")]
+size_flags_horizontal = 0
 script = ExtResource("3_nhkr4")
-Age_Label_Node = NodePath("")
-Name_Label_Node = NodePath("")
-Hunger_Bar_Node = NodePath("")
-Happiness_Bar_Node = NodePath("")
+Age_Label_Node = NodePath("Head/HBoxContainer/Pet_Age")
+Name_Label_Node = NodePath("Head/HBoxContainer/Pet_Name")
+Hunger_Bar_Node = NodePath("Bottom/HBoxContainer/Control/HBoxContainer/HealthBar")
+Happiness_Bar_Node = NodePath("Bottom/HBoxContainer/Control2/HBoxContainer/EnergyBar")
+Type_Lable_Node = NodePath("Head/HBoxContainer/Pet_Type")
+PetInfo_Node = NodePath("PetInfo")
+
+[node name="Pet_Age" parent="Camera2D/CanvasLayer/Control/Head/HBoxContainer" index="1"]
+horizontal_alignment = 1
+
+[node name="PetInfo" parent="Camera2D/CanvasLayer/Control" index="2"]
+script = ExtResource("6_y4jh7")
+Name = ""
+Age = 0
+Hunger = 0
+Happines = 0
+Info_Manager = NodePath("../../../..")
+rate_of_change_of_age = 0.02
+rate_of_change_of_hunger = 0.4
+rate_of_change_of_happiness = 0.5
+
+[editable path="Dog1"]
+[editable path="Dog2"]
+[editable path="Camera2D/CanvasLayer/Control"]
