@@ -1,32 +1,50 @@
-
-from py4godot.methods import private
-from py4godot.signals import signal, SignalArg
+import json
+import os
+from py4godot.classes.Node2D import Node2D
 from py4godot.classes import gdclass
-from py4godot.classes.core import Vector3
-from py4godot.classes.Node import Node
 
 @gdclass
-class Data_Puller(Node):
+class Data_Puller(Node2D):
 
-	# define properties like this
-	test_int: int = 5
-	test_float: float = 5.2
-	test_bool: bool = True
-	test_vector: Vector3 = Vector3.new3(1,2,3)
+	SAVE_PATH = "save_data.json"
 
-	# define signals like this
-	test_signal = signal([SignalArg("test_arg", int)])
+	DEFAULT_SAVE = {
+		'petName':'',
+		'petAge' : 0,
+		'petHunger' : 100,
+		'petEnergy' : 100,
+		'petType' : 0
+	}
 
+	def _ready(self):
+		print("SaveManager ready!")
+		data = self.load_data()
+		print("Loaded:", data)
 
-	def _ready(self) -> None:
-		pass
-		# put initialization code here
+	def save_data(self, data: dict):
+		try:
+			with open(self.get_save_path(), "w") as f:
+				json.dump(data, f, indent=4)
+			print("Saved:", data)
+		except Exception as e:
+			print("Error saving:", e)
 
-	def _process(self, delta:float) -> None:
-		pass
-		# put dynamic code here
+	def load_data(self) -> dict:
+		try:
+			path = self.get_save_path()
 
-	# Hide the method in the godot editor
-	@private
-	def test_method(self):
-		pass
+			if os.path.exists(path):
+				with open(path, "r") as f:
+					return json.load(f)
+			else:
+				print("No save file found → creating new save...")
+				self.save_data(self.DEFAULT_SAVE)
+				return self.DEFAULT_SAVE.copy()
+
+		except Exception as e:
+			print("Error loading:", e)
+			return self.DEFAULT_SAVE.copy()
+
+	def get_save_path(self) -> str:
+		base = os.getcwd()
+		return os.path.join(base, self.SAVE_PATH)

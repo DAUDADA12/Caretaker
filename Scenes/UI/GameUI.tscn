@@ -1,4 +1,10 @@
-[gd_scene format=3 uid="uid://77wxs0vi71pn"]
+[gd_scene load_steps=3 format=3 uid="uid://77wxs0vi71pn"]
+
+[ext_resource type="FontFile" uid="uid://cru5hfyhvfvn1" path="res://UI/Fonts/Pixelated/PixelifySans-VariableFont_wght.ttf" id="1_13cgw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_71wt1"]
+font = ExtResource("1_13cgw")
+font_size = 60
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -8,8 +14,75 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="."]
+[node name="Head" type="Panel" parent="."]
 layout_mode = 1
-offset_right = 40.0
-offset_bottom = 23.0
-text = "TEST"
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.162
+offset_bottom = 0.024002075
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Head"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Pet_Name" type="Label" parent="Head/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Name:"
+label_settings = SubResource("LabelSettings_71wt1")
+vertical_alignment = 1
+
+[node name="Pet_Age" type="Label" parent="Head/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Age"
+label_settings = SubResource("LabelSettings_71wt1")
+vertical_alignment = 1
+
+[node name="Pet_Type" type="Label" parent="Head/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Type:"
+label_settings = SubResource("LabelSettings_71wt1")
+vertical_alignment = 1
+
+[node name="Bottom" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.81900007
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 0.28796387
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Bottom"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HSlider" type="HSlider" parent="Bottom/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+editable = false
+scrollable = false
+tick_count = 1
+
+[node name="HSlider2" type="HSlider" parent="Bottom/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+editable = false
+scrollable = false
+tick_count = 1
+ticks_position = 3

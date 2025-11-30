@@ -7,6 +7,7 @@ class Pet_Data(Node):
 	Name: str = ""
 	Age: int = 0
 	Hunger: int = 0
+	Happines: float = 0
 
 	Age_Node: NodePath = NodePath()
 	Age_Label = None
