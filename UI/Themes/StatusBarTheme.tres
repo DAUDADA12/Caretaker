@@ -1,0 +1,33 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://dtkaoanqkkah8"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_80776"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_8uvb4"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_xhkjk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_intyv"]
+bg_color = Color(0.880573, 0.24396834, 0.23782936, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4284l"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
+
+[resource]
+HSlider/constants/center_grabber = 0
+HSlider/constants/grabber_offset = 0
+HSlider/constants/tick_offset = 0
+HSlider/icons/grabber = SubResource("ViewportTexture_80776")
+HSlider/icons/grabber_disabled = SubResource("ViewportTexture_8uvb4")
+HSlider/icons/grabber_highlight = SubResource("ViewportTexture_xhkjk")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_intyv")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_intyv")
+HSlider/styles/slider = SubResource("StyleBoxFlat_4284l")
