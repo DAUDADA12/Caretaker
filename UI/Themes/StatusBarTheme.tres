@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://dtkaoanqkkah8"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://dtkaoanqkkah8"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_80776"]
 
@@ -24,6 +24,13 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 corner_detail = 6
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ey4cs"]
+bg_color = Color(0.32544088, 0.3254409, 0.32544076, 0.5058824)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
 [resource]
 HSlider/constants/center_grabber = 0
 HSlider/constants/grabber_offset = 0
@@ -34,3 +41,4 @@ HSlider/icons/grabber_highlight = SubResource("ViewportTexture_xhkjk")
 HSlider/styles/grabber_area = SubResource("StyleBoxFlat_kh4kq")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_intyv")
 HSlider/styles/slider = SubResource("StyleBoxFlat_4284l")
+Panel/styles/panel = SubResource("StyleBoxFlat_ey4cs")

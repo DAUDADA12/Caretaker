@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cw3o86p3govo5"]
+[gd_scene load_steps=32 format=3 uid="uid://cw3o86p3govo5"]
 
 [ext_resource type="Script" path="res://Scripts/Initializer/Data_Puller.py" id="1_hpc76"]
 [ext_resource type="Texture2D" uid="uid://bpatsm2140fuu" path="res://Sprites/Background/LivingRoom.png" id="2_q68mp"]
@@ -9,9 +9,16 @@
 [ext_resource type="Script" path="res://Scripts/PetData/Pet_Data.py" id="6_y4jh7"]
 [ext_resource type="Texture2D" uid="uid://dlf3c4giaf8j3" path="res://UI/Images/CareTaker UI Icons1.png" id="8_4b75m"]
 [ext_resource type="Texture2D" uid="uid://mr8s3gbg7ew3" path="res://UI/Images/Apple Icon.png" id="8_f140w"]
-[ext_resource type="Texture2D" uid="uid://ce23xipo0slyn" path="res://UI/Images/CareTaker UI Icons0.png" id="9_4b75m"]
-[ext_resource type="Texture2D" uid="uid://msgnvpjjxt1p" path="res://UI/Images/LightningIcon.png" id="10_8ju71"]
+[ext_resource type="Script" path="res://Scripts/Features/food.py" id="10_6t1o7"]
+[ext_resource type="Texture2D" uid="uid://ig2ehc0braoe" path="res://UI/Images/Cleanliness.png" id="11_5qxwa"]
+[ext_resource type="Script" path="res://Scripts/Features/play.py" id="12_5qxwa"]
+[ext_resource type="Script" path="res://Scripts/Features/cleanPet.py" id="12_6rnll"]
 [ext_resource type="Texture2D" uid="uid://btj8sq6bqk5l4" path="res://UI/Images/Smile.png" id="12_xb4mg"]
+[ext_resource type="Texture2D" uid="uid://msgnvpjjxt1p" path="res://UI/Images/LightningIcon.png" id="12_xc4hf"]
+[ext_resource type="Script" path="res://Scripts/Features/restPet.py" id="13_xc4hf"]
+[ext_resource type="Texture2D" uid="uid://dbagv6r5nk85" path="res://Sprites/4 Cat 2/Idle.png" id="17_hx8n4"]
+[ext_resource type="FontFile" uid="uid://ckbbcbx7xtkav" path="res://UI/Fonts/Pixelated/static/PixelifySans-Bold.ttf" id="17_i0j58"]
+[ext_resource type="Texture2D" uid="uid://bbkwsfl85l6rj" path="res://Sprites/3 Cat/Idle.png" id="18_i0j58"]
 
 [sub_resource type="Gradient" id="Gradient_q68mp"]
 offsets = PackedFloat32Array(0.9866667, 1)
@@ -19,6 +26,11 @@ offsets = PackedFloat32Array(0.9866667, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_f140w"]
 gradient = SubResource("Gradient_q68mp")
 fill_to = Vector2(0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6t1o7"]
+
+[sub_resource type="Theme" id="Theme_5qxwa"]
+Panel/styles/panel = SubResource("StyleBoxFlat_6t1o7")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_80776"]
 
@@ -52,6 +64,14 @@ HSlider/styles/grabber_area = SubResource("StyleBoxFlat_intyv")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_intyv")
 HSlider/styles/slider = SubResource("StyleBoxFlat_4284l")
 
+[sub_resource type="LabelSettings" id="LabelSettings_c1ier"]
+font = ExtResource("17_i0j58")
+font_size = 72
+
+[sub_resource type="Theme" id="Theme_gyaec"]
+Button/font_sizes/font_size = 37
+Button/fonts/font = ExtResource("17_i0j58")
+
 [node name="MainScene" type="Node2D"]
 _import_path = NodePath("")
 unique_name_in_owner = false
@@ -81,7 +101,7 @@ rotation = 0.0
 scale = Vector2(1, 1)
 skew = 0.0
 script = ExtResource("1_hpc76")
-SAVE_PATH = "save_data.json"
+SAVE_FILENAME = "save_data.json"
 
 [node name="BlackBG" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -98,6 +118,7 @@ scale = Vector2(35.859375, 20.25)
 texture = ExtResource("2_q68mp")
 
 [node name="Dog1" parent="." instance=ExtResource("4_qxria")]
+visible = false
 
 [node name="CharacterBody2D" parent="Dog1" index="0"]
 position = Vector2(581, 306)
@@ -115,11 +136,17 @@ Age_Label_Node = NodePath("Head/HBoxContainer/Pet_Age")
 Name_Label_Node = NodePath("Head/HBoxContainer/Pet_Name")
 Hunger_Bar_Node = NodePath("Bottom/HBoxContainer/Hunger/HBoxContainer/HealthBar")
 Happiness_Bar_Node = NodePath("Bottom/HBoxContainer/Happiness/HBoxContainer/HealthBar")
+Health_Bar_Node = NodePath("Bottom/HBoxContainer/Health/HBoxContainer/EnergyBar")
+Cleanliness_Bar_Node = NodePath("Bottom/HBoxContainer/Cleanliness/HBoxContainer/HealthBar")
 Type_Lable_Node = NodePath("Head/HBoxContainer/Pet_Type")
 PetInfo_Node = NodePath("PetInfo")
+Energy_Bar_Node = NodePath("Bottom/HBoxContainer/Energy/HBoxContainer/EnergyBar")
 
 [node name="Pet_Age" parent="CanvasLayer/Control/Head/HBoxContainer" index="1"]
 horizontal_alignment = 1
+
+[node name="Bottom" parent="CanvasLayer/Control" index="1"]
+theme = SubResource("Theme_5qxwa")
 
 [node name="HBoxContainer" parent="CanvasLayer/Control/Bottom" index="0"]
 offset_left = 24.0
@@ -158,18 +185,25 @@ tick_count = 1
 script = ExtResource("6_y4jh7")
 Name = ""
 Age = 0
+Type = 0
 Hunger = 0
 Happines = 0
 Energy = 0
 Health = 0
 Cleanliness = 0
+Rest = 0
 Info_Manager = NodePath("../../..")
-rate_of_change_of_age = 0.02
+DeathUI_Path = NodePath("../../DeathScreen")
+German_Shephard = NodePath("../../../Dog1")
+Shiba_Inu = NodePath("../../../Dog2")
+OrangeCat = NodePath("../../../Cat1")
+BlackCat = NodePath("../../../Cat2")
+rate_of_change_of_age = 0.3
 rate_of_change_of_hunger = 0.4
 rate_of_change_of_happiness = 0.5
 rate_of_change_of_health = 1.2
-rate_of_change_of_cleanliness = 0.2
-rate_of_change_of_energy = 0.5
+rate_of_change_of_cleanliness = 0.5
+rate_of_change_of_energy = 0.6
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
 layout_mode = 1
@@ -178,37 +212,169 @@ anchor_left = 0.85400003
 anchor_top = 0.22200002
 anchor_right = 0.94400007
 anchor_bottom = 0.753
-offset_left = 0.19195557
-offset_top = -7.856018
-offset_right = 0.5119629
-offset_bottom = 0.055999756
+offset_left = 16.191956
+offset_top = 40.143982
+offset_right = 16.511963
+offset_bottom = -71.944
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
 [node name="Hunger" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
 texture_filter = 1
+texture_repeat = 0
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
 layout_mode = 2
+size_flags_horizontal = 1
 size_flags_vertical = 3
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+focus_behavior_recursive = 0
+mouse_filter = 0
+mouse_behavior_recursive = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+accessibility_name = ""
+accessibility_description = ""
+accessibility_live = 0
+accessibility_controls_nodes = Array[NodePath]([])
+accessibility_described_by_nodes = Array[NodePath]([])
+accessibility_labeled_by_nodes = Array[NodePath]([])
+accessibility_flow_to_nodes = Array[NodePath]([])
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+shortcut_feedback = true
+shortcut_in_tooltip = true
+text = ""
 icon = ExtResource("8_f140w")
+flat = false
+alignment = 1
+text_overrun_behavior = 0
+autowrap_mode = 0
+autowrap_trim_flags = 128
+clip_text = false
 icon_alignment = 1
+vertical_icon_alignment = 1
 expand_icon = true
+text_direction = 0
+language = ""
+script = ExtResource("10_6t1o7")
+Pet_Info = NodePath("../../PetInfo")
 
-[node name="Rest" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
+[node name="Clean" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
 texture_filter = 1
+texture_repeat = 0
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
 layout_mode = 2
+size_flags_horizontal = 1
 size_flags_vertical = 3
-icon = ExtResource("9_4b75m")
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+focus_behavior_recursive = 0
+mouse_filter = 0
+mouse_behavior_recursive = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+accessibility_name = ""
+accessibility_description = ""
+accessibility_live = 0
+accessibility_controls_nodes = Array[NodePath]([])
+accessibility_described_by_nodes = Array[NodePath]([])
+accessibility_labeled_by_nodes = Array[NodePath]([])
+accessibility_flow_to_nodes = Array[NodePath]([])
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+shortcut_feedback = true
+shortcut_in_tooltip = true
+text = ""
+icon = ExtResource("11_5qxwa")
+flat = false
+alignment = 1
+text_overrun_behavior = 0
+autowrap_mode = 0
+autowrap_trim_flags = 128
+clip_text = false
 icon_alignment = 1
+vertical_icon_alignment = 1
 expand_icon = true
-
-[node name="Play" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
-texture_filter = 1
-layout_mode = 2
-size_flags_vertical = 3
-icon = ExtResource("8_4b75m")
-icon_alignment = 1
-expand_icon = true
+text_direction = 0
+language = ""
+script = ExtResource("12_6rnll")
+Pet_Info = NodePath("../../PetInfo")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Control"]
 layout_mode = 1
@@ -221,27 +387,239 @@ offset_left = 0.09600067
 offset_top = -0.03201294
 offset_right = 3.8719788
 offset_bottom = -0.016021729
+grow_horizontal = 0
 grow_vertical = 2
 alignment = 1
 
-[node name="Energy" type="Button" parent="CanvasLayer/Control/VBoxContainer2"]
-texture_filter = 1
-layout_mode = 2
-size_flags_vertical = 3
-icon = ExtResource("10_8ju71")
-icon_alignment = 1
-expand_icon = true
-
 [node name="Rest" type="Button" parent="CanvasLayer/Control/VBoxContainer2"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
 texture_filter = 1
+texture_repeat = 0
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
 layout_mode = 2
+size_flags_horizontal = 1
 size_flags_vertical = 3
-icon = ExtResource("12_xb4mg")
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+focus_behavior_recursive = 0
+mouse_filter = 0
+mouse_behavior_recursive = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+accessibility_name = ""
+accessibility_description = ""
+accessibility_live = 0
+accessibility_controls_nodes = Array[NodePath]([])
+accessibility_described_by_nodes = Array[NodePath]([])
+accessibility_labeled_by_nodes = Array[NodePath]([])
+accessibility_flow_to_nodes = Array[NodePath]([])
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+shortcut_feedback = true
+shortcut_in_tooltip = true
+text = ""
+icon = ExtResource("12_xc4hf")
+flat = false
+alignment = 1
+text_overrun_behavior = 0
+autowrap_mode = 0
+autowrap_trim_flags = 128
+clip_text = false
 icon_alignment = 1
+vertical_icon_alignment = 1
 expand_icon = true
+text_direction = 0
+language = ""
+script = ExtResource("13_xc4hf")
+Pet_Info = NodePath("../../PetInfo")
+
+[node name="Play" type="Button" parent="CanvasLayer/Control/VBoxContainer2"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 1
+texture_repeat = 0
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+focus_behavior_recursive = 0
+mouse_filter = 0
+mouse_behavior_recursive = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+accessibility_name = ""
+accessibility_description = ""
+accessibility_live = 0
+accessibility_controls_nodes = Array[NodePath]([])
+accessibility_described_by_nodes = Array[NodePath]([])
+accessibility_labeled_by_nodes = Array[NodePath]([])
+accessibility_flow_to_nodes = Array[NodePath]([])
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+shortcut_feedback = true
+shortcut_in_tooltip = true
+text = ""
+icon = ExtResource("12_xb4mg")
+flat = false
+alignment = 1
+text_overrun_behavior = 0
+autowrap_mode = 0
+autowrap_trim_flags = 128
+clip_text = false
+icon_alignment = 1
+vertical_icon_alignment = 1
+expand_icon = true
+text_direction = 0
+language = ""
+script = ExtResource("12_5qxwa")
+Pet_Info = NodePath("../../PetInfo")
+
+[node name="DeathScreen" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/DeathScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer/DeathScreen"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.185
+anchor_right = 1.0
+anchor_bottom = 0.333
+offset_top = 0.11999512
+offset_bottom = -37.783997
+grow_horizontal = 2
+text = "Your pet Died..."
+label_settings = SubResource("LabelSettings_c1ier")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/DeathScreen"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.22200002
+anchor_top = 0.432
+anchor_right = 0.77800006
+anchor_bottom = 0.568
+offset_left = 0.25598145
+offset_top = 0.06399536
+offset_right = -0.25604248
+offset_bottom = -0.06402588
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_gyaec")
+text = "Restart Journey......."
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(578, 325)
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Cat2" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(580.99994, 328)
+scale = Vector2(6.416667, 6.333333)
+texture = ExtResource("17_hx8n4")
+hframes = 4
+
+[node name="Cat1" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(559.99994, 328)
+scale = Vector2(6.416667, 6.333333)
+texture = ExtResource("18_i0j58")
+hframes = 4
+
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Hunger" to="CanvasLayer/Control/VBoxContainer/Hunger" method="_on_pressed"]
+[connection signal="button_down" from="CanvasLayer/Control/VBoxContainer/Clean" to="CanvasLayer/Control/VBoxContainer/Clean" method="_on_button_down"]
+[connection signal="button_down" from="CanvasLayer/Control/VBoxContainer2/Rest" to="CanvasLayer/Control/VBoxContainer2/Rest" method="_on_button_down"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/Play" to="CanvasLayer/Control/VBoxContainer2/Play" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/DeathScreen/Button" to="CanvasLayer/Control/PetInfo" method="_on_button_pressed"]
 
 [editable path="Dog1"]
 [editable path="Dog2"]
